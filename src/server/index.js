@@ -36,8 +36,13 @@ io.on('connection', function (socket) {
             .find(player => player.socket.id === socket.id)
             .position = pos
     })
-});
+    socket.on('disconnect', () => {
+        console.log(`player with id: ${socket.id} disconnected`)
+        players = players
+            .filter(player => player.socket.id !== socket.id)
 
+    })
+});
 setInterval(function () {
     io.sockets.emit('players', {items: formatPlayers(players)})
 }, 1000 / tickrate)
