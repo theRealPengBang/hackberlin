@@ -1,10 +1,11 @@
 import express from 'express'
 import randomcolor from 'randomcolor'
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var fs = require('fs')
-var path = require('path')
+import HTTP from 'http'
+import IO from 'socket.io'
+import path from 'path'
+let app = express();
+let http = HTTP.Server(app);
+let io = IO(http);
 
 let tickrate = 100;
 
