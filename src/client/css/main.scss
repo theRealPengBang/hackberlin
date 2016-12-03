@@ -1,7 +1,9 @@
 * {
   box-sizing: border-box;
 }
-
+canvas {
+  cursor: none;
+}
 html, body {
   padding: 0;
   margin: 0;
