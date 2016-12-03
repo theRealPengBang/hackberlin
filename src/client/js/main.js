@@ -51,6 +51,10 @@ let initGame = () => {
         ctx.fillStyle = player.color
         ctx.arc(player.position.x, player.position.y, 10, 0, 2 * Math.PI)
         ctx.fill()
+
+        ctx.font = "12px sans-serif";
+        ctx.fillStyle = '#000000'
+        ctx.fillText(player.name, player.position.x + 15, player.position.y + 5);
     }
 
     let render = () => {
