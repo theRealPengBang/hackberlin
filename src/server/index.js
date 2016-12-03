@@ -11,6 +11,12 @@ app.use(express.static(publicPath))
 
 io.on('connection', function (socket) {
     console.log('!!!connection!!!')
+
+    socket.emit('message', 'hallo duda');
+
+    socket.on('message', msg => {
+        console.log('position:', msg);
+    });
 });
 
 // app.get('/', function(req, res){
