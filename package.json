@@ -4,7 +4,7 @@
   "description": "we do things",
   "main": "index.js",
   "scripts": {
-    "serve": "cd src/server && babel-node --use_strict index.js",
+    "serve": "node dist/server/index.js",
     "fe": "babel ./client/src/ -d ./client/dist/",
     "build": "babel ./src/server/ -d ./dist/server/"
   },
