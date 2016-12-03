@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "serve": "node dist/server/index.js",
-    "build": "babel ./src/server/ -d ./dist/server/",
-    "bs": "npm run build && npm run serve"
+    "build:server": "babel ./src/server/ -d ./dist/server/",
+    "bs": "npm run build && npm run serve",
+    "build:client": "test -d dist/public || mkdir -p dist/public && cp -rf ./src/client/templates/* ./dist/public/",
+    "build": "npm run build:server && npm run build:client"
   },
   "repository": {
     "type": "git",
