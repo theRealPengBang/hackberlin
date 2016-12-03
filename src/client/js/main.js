@@ -2,38 +2,7 @@ import io from 'socket.io-client'
 import $ from 'jquery'
 import raf from 'raf'
 
-const tickrate = 100;
 let name = 'Anon';
-
-let socket = io();
-
-socket.on('message', msg => {
-    console.log('hello', msg);
-});
-
-let players = []
-
-let cursorPosition = {x: 0, y: 0}
-window.addEventListener('mousemove', e => {
-    cursorPosition = {x: e.clientX, y: e.clientY}
-})
-
-setInterval(() => {
-    socket.emit('cursorPosition', cursorPosition)
-}, 1000 / tickrate)
-
-
-socket.on('players', data => {
-    players = data.items
-})
-
-let distance = (player1, player2) => Math.sqrt(Math.pow(player1.position.x - player2.position.x, 2) + Math.pow(player1.position.y - player2.position.y, 2))
-
-let closePlayers = (player) => players
-    .filter(other => other.id !== player.id && distance(other, player) < 70)
-    .sort((a,b)=> distance(player,a)-distance(player,b))
-
-let playerIsClose = (player) => closePlayers(player).length > 0
 
 let initGame = () => {
     let canvas = null
@@ -41,6 +10,37 @@ let initGame = () => {
     let ctx = null
     let $window = $(window)
     let $body = $('body')
+
+    const tickrate = 100;
+
+    let socket = io();
+
+    socket.emit('send playername', name)
+
+    let players = []
+
+    let cursorPosition = {x: 0, y: 0}
+    window.addEventListener('mousemove', e => {
+        cursorPosition = {x: e.clientX, y: e.clientY}
+    })
+
+    setInterval(() => {
+        socket.emit('cursorPosition', cursorPosition)
+    }, 1000 / tickrate)
+
+
+    socket.on('players', data => {
+        players = data.items
+    })
+
+    let distance = (player1, player2) => Math.sqrt(Math.pow(player1.position.x - player2.position.x, 2) + Math.pow(player1.position.y - player2.position.y, 2))
+
+    let closePlayers = (player) => players
+        .filter(other => other.id !== player.id && distance(other, player) < 70)
+        .sort((a,b)=> distance(player,a)-distance(player,b))
+
+    let playerIsClose = (player) => closePlayers(player).length > 0
+
 
     let createCanvas = () => $(`<canvas class="maincanvas" id="maincanvas" width="${window.innerWidth}" height="${window.innerHeight}">`)
     let setupCanvas = () => {
@@ -99,8 +99,6 @@ $(function () {
         name = $nameinput.val()
 
         $inputform.hide()
-
-        socket.emit('send playername', name)
 
         initGame()
     })
