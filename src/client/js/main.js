@@ -2,7 +2,7 @@ import io from 'socket.io-client'
 import $ from 'jquery'
 import raf from 'raf'
 
-const tickrate = 50;
+const tickrate = 100;
 
 let socket = io('http://localhost:1337');
 
@@ -19,7 +19,7 @@ window.addEventListener('mousemove', e => {
 })
 setInterval(() => {
     socket.emit('cursorPosition', cursorPosition)
-}, tickrate)
+}, 1000 / tickrate)
 
 
 socket.on('players', data => {
@@ -68,6 +68,6 @@ $(function () {
 
     setInterval(() => {
         render()
-    }, tickrate)
+    }, 1000 / tickrate)
 })
 

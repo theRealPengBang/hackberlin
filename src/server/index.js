@@ -5,6 +5,8 @@ var io = require('socket.io')(http);
 var fs = require('fs')
 var path = require('path')
 
+let tickrate = 100;
+
 let publicPath = path.join(__dirname, '../public')
 
 app.use(express.static(publicPath))
@@ -19,7 +21,6 @@ let formatPlayers = (players) => players.map(player => {
 })
 
 io.on('connection', function (socket) {
-    let connectionId;
     console.log('Connection:', socket.id)
 
     players.push({
@@ -36,7 +37,7 @@ io.on('connection', function (socket) {
 
 setInterval(function () {
     io.sockets.emit('players', {items: formatPlayers(players)})
-}, 50)
+}, 1000 / tickrate)
 
 // app.get('/', function(req, res){
 //     res.sendFile(publicPath + '/index.html');
