@@ -46,8 +46,10 @@ $(function () {
     }
 
     let renderPlayer = (player) => {
-        ctx.fillStyle = player.color;
-        ctx.fillRect(player.position.x, player.position.y, 10, 10);
+        ctx.beginPath()
+        ctx.fillStyle = player.color
+        ctx.arc(player.position.x, player.position.y, 5, 0, 2 * Math.PI)
+        ctx.fill()
     }
 
     let render = () => {
