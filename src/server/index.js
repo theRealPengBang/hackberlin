@@ -9,19 +9,34 @@ let publicPath = path.join(__dirname, '../public')
 
 app.use(express.static(publicPath))
 
+let players = []
+
+let formatPlayers = (players) => players.map(player => {
+    return {
+        id: player.socket.id,
+        position: player.position
+    }
+})
+
 io.on('connection', function (socket) {
     let connectionId;
-    console.log('!!!connection!!!',socket.id)
+    console.log('Connection:', socket.id)
 
-    socket.emit('message', 'hallo duda');
+    players.push({
+        socket,
+        position: {x: 0, y: 0}
+    })
 
-    socket.on('position', msg => {
-        console.log('position:', msg);
-    });
-    socket.on('position', pos => console.log(pos))
-
-    socket.on('cursorPosition', pos=> console.log('cursor Position:', pos))
+    socket.on('cursorPosition', pos => {
+        players
+            .find(player => player.socket.id === socket.id)
+            .position = pos
+    })
 });
+
+setInterval(function () {
+    io.sockets.emit('players', {items: formatPlayers(players)})
+}, 50)
 
 // app.get('/', function(req, res){
 //     res.sendFile(publicPath + '/index.html');
