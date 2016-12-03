@@ -14,7 +14,7 @@ io.on('connection', function (socket) {
 
     socket.emit('message', 'hallo duda');
 
-    socket.on('message', msg => {
+    socket.on('position', msg => {
         console.log('position:', msg);
     });
 });
