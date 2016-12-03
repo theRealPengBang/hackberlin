@@ -57,6 +57,7 @@ let initGame = () => {
         ctx.fill()
 
         if (playerIsClose(player)) {
+            console.log("in if clause")
             ctx.font = "12px sans-serif";
             ctx.fillStyle = '#000000'
             ctx.fillText(player.name, player.position.x + 15, player.position.y + 5);

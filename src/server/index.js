@@ -15,7 +15,8 @@ app.use(express.static(publicPath))
 let players = []
 
 let formatPlayers = (players) => players.map(player => {
-    const {id,position,color,name} = player
+    const {position,color,name} = player
+    const id = player.socket.id
     return {
         id,
         position,
@@ -31,7 +32,7 @@ io.on('connection', function (socket) {
         socket,
         position: {x: 0, y: 0},
         color: randomcolor(),
-        name : "unknown"
+        name : "anonymous"
     })
 
     socket.on('cursorPosition', pos => {
