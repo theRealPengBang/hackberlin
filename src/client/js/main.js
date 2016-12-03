@@ -8,7 +8,7 @@ socket.on('message', msg => {
 });
 
 setInterval(function() {
-    socket.emit('position', {test: 'asdf'})
+    socket.emit('position', {position:'10'})
     console.log('gesendet')
 }, 1000);
 
