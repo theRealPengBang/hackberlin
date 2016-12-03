@@ -1,5 +1,6 @@
 import io from 'socket.io-client'
 import $ from 'jquery'
+import util from '../../server/shared/util'
 
 let name = 'Anon';
 
@@ -32,11 +33,10 @@ let initGame = () => {
         players = data.items
     })
 
-    let distance = (player1, player2) => Math.sqrt(Math.pow(player1.position.x - player2.position.x, 2) + Math.pow(player1.position.y - player2.position.y, 2))
 
     let closePlayers = (player) => players
-        .filter(other => other.id !== player.id && distance(other, player) < 70)
-        .sort((a,b)=> distance(player,a)-distance(player,b))
+        .filter(other => other.id !== player.id && util.distance(other, player) < 70)
+        .sort((a, b) => util.distance(player, a) - util.distance(player, b))
 
     let playerIsClose = (player) => closePlayers(player).length > 0
 
@@ -56,14 +56,14 @@ let initGame = () => {
     let renderPlayer = (player) => {
         ctx.beginPath()
         ctx.fillStyle = player.color
-        ctx.arc(player.position.x, player.position.y, 10, 0, 2 * Math.PI)
+        ctx.arc(player.position.x, player.position.y, player.radius, 0, 2 * Math.PI)
         ctx.fill()
 
         let others = closePlayers(player)
 
         if (others.length > 0) {
             ctx.font = "12px sans-serif"
-            ctx.fillStyle = `rgba(0,0,0,${1 - (distance(others[0], player) - 20) / 50})`
+            ctx.fillStyle = `rgba(0,0,0,${1 - (util.distance(others[0], player) - 20) / 50})`
             ctx.fillText(player.name, player.position.x + 15, player.position.y + 5)
         }
     }

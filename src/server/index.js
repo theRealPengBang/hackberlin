@@ -3,6 +3,7 @@ import randomcolor from 'randomcolor'
 import HTTP from 'http'
 import IO from 'socket.io'
 import path from 'path'
+import util from './shared/util.js'
 
 let app = express();
 let http = HTTP.Server(app);
@@ -14,13 +15,14 @@ let players = []
 app.use(express.static(publicPath))
 
 let formatPlayers = (players) => players.map(player => {
-    const {position,color,name} = player
+    const {position, color, name, radius} = player
     const id = player.socket.id
     return {
         id,
         position,
         color,
-        name
+        name,
+        radius
     }
 })
 
@@ -31,7 +33,8 @@ io.on('connection', function (socket) {
         socket,
         position: {x: 0, y: 0},
         color: randomcolor(),
-        name : "anonymous"
+        name: "anonymous",
+        radius: 10
     })
 
     socket.on('cursorPosition', pos => {
