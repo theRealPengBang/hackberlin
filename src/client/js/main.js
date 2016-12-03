@@ -1,6 +1,5 @@
 import io from 'socket.io-client'
 import $ from 'jquery'
-import raf from 'raf'
 
 let name = 'Anon';
 
@@ -77,14 +76,7 @@ let initGame = () => {
     setupCanvas()
     $window.on('resize', resizeCanvas)
 
-
-    // raf(function tick() {
-    //
-    //     render()
-    //
-    //     raf(tick())
-    // })
-
+    // we should use requestanimationframe, but naaaahhhh
     setInterval(() => {
         render()
     }, 1000 / tickrate)

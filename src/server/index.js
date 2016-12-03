@@ -3,17 +3,15 @@ import randomcolor from 'randomcolor'
 import HTTP from 'http'
 import IO from 'socket.io'
 import path from 'path'
+
 let app = express();
 let http = HTTP.Server(app);
 let io = IO(http);
-
 let tickrate = 100;
-
 let publicPath = path.join(__dirname, '../public')
+let players = []
 
 app.use(express.static(publicPath))
-
-let players = []
 
 let formatPlayers = (players) => players.map(player => {
     const {position,color,name} = player
