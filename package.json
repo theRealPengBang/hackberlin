@@ -8,7 +8,9 @@
     "build:server": "babel ./src/server/ -d ./dist/server/",
     "bs": "npm run build && npm run serve",
     "build:client": "test -d dist/public || mkdir -p dist/public && cp -rf ./src/client/templates/* ./dist/public/",
-    "build": "npm run build:server && npm run build:client"
+    "build": "npm run build:server && npm run build:client",
+    "build:js": "browserify -e frontend/src/js/app.js -o laravel/public/assets/js/app.js -t [ babelify --presets [ es2015 ] ]",
+    "build:css": "node-sass frontend/src/scss/app.scss --sourceMapEmbed | postcss -u autoprefixer -o laravel/public/assets/css/app.css"
   },
   "repository": {
     "type": "git",
