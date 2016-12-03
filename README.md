@@ -11,7 +11,7 @@ npm run bs
 Maybe you need to add the /dist folder with the subfolders:
 ```
 /dist/public/js
-/dist/public/js
+/dist/public/css
 ```
 Do that, if the build script keeps acting like your ex...
 
