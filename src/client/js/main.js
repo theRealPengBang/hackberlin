@@ -61,7 +61,7 @@ let initGame = () => {
         if (others.length > 0) {
             console.log("in if clause")
             ctx.font = "12px sans-serif"
-            ctx.fillStyle = `rgba(0,0,0,${distance(others[0], player) / 50 * 255})`
+            ctx.fillStyle = `rgba(0,0,0,${1 - distance(others[0], player) / 50})`
             ctx.fillText(player.name, player.position.x + 15, player.position.y + 5);
         }
     }
