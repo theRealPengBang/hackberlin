@@ -34,12 +34,6 @@ let initGame = () => {
     })
 
 
-    let closePlayers = (player) => players
-        .filter(other => other.id !== player.id && util.distance(other, player) < 70)
-        .sort((a, b) => util.distance(player, a) - util.distance(player, b))
-
-    let playerIsClose = (player) => closePlayers(player).length > 0
-
 
     let createCanvas = () => $(`<canvas class="maincanvas" id="maincanvas" width="${window.innerWidth}" height="${window.innerHeight}">`)
     let setupCanvas = () => {
@@ -59,7 +53,7 @@ let initGame = () => {
         ctx.arc(player.position.x, player.position.y, player.radius, 0, 2 * Math.PI)
         ctx.fill()
 
-        let others = closePlayers(player)
+        let others = util.closePlayers(player, players)
 
         if (others.length > 0) {
             ctx.font = "12px sans-serif"
