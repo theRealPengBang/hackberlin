@@ -15,10 +15,12 @@ app.use(express.static(publicPath))
 let players = []
 
 let formatPlayers = (players) => players.map(player => {
+    const {id,position,color,name} = player
     return {
-        id: player.socket.id,
-        position: player.position,
-        color: player.color
+        id,
+        position,
+        color,
+        name
     }
 })
 
@@ -28,7 +30,8 @@ io.on('connection', function (socket) {
     players.push({
         socket,
         position: {x: 0, y: 0},
-        color: randomcolor()
+        color: randomcolor(),
+        name : "unknown"
     })
 
     socket.on('cursorPosition', pos => {
@@ -40,7 +43,10 @@ io.on('connection', function (socket) {
         console.log(`player with id: ${socket.id} disconnected`)
         players = players
             .filter(player => player.socket.id !== socket.id)
-
+    })
+    socket.on('send playername', playerName => {
+        let player = players.find(player => player.socket.id === socket.id)
+        player.name = playerName
     })
 });
 setInterval(function () {
