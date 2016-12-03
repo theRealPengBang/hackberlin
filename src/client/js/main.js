@@ -28,7 +28,9 @@ socket.on('players', data => {
 })
 
 let distance = (player1, player2) => Math.sqrt(Math.pow(player1.position.x - player2.position.x, 2) + Math.pow(player1.position.y - player2.position.y, 2))
-let closePlayers = (player) => players.filter(other => other.id !== player.id && distance(other, player) < 50)
+let closePlayers = (player) =>
+    players.filter(other => other.id !== player.id && distance(other, player) < 50)
+            .sort((a,b)=> distance(player,a)-distance(player,b))
 let playerIsClose = (player) => closePlayers(player).length > 0
 
 let initGame = () => {
