@@ -1,4 +1,5 @@
 import express from 'express'
+import randomcolor from 'randomcolor'
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -16,7 +17,8 @@ let players = []
 let formatPlayers = (players) => players.map(player => {
     return {
         id: player.socket.id,
-        position: player.position
+        position: player.position,
+        color: player.color
     }
 })
 
@@ -25,7 +27,8 @@ io.on('connection', function (socket) {
 
     players.push({
         socket,
-        position: {x: 0, y: 0}
+        position: {x: 0, y: 0},
+        color: randomcolor()
     })
 
     socket.on('cursorPosition', pos => {
@@ -38,10 +41,6 @@ io.on('connection', function (socket) {
 setInterval(function () {
     io.sockets.emit('players', {items: formatPlayers(players)})
 }, 1000 / tickrate)
-
-// app.get('/', function(req, res){
-//     res.sendFile(publicPath + '/index.html');
-// });
 
 http.listen(1337, function () {
     console.log('listening on *:1337');

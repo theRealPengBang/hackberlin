@@ -46,7 +46,7 @@ $(function () {
     }
 
     let renderPlayer = (player) => {
-        ctx.fillStyle = "green";
+        ctx.fillStyle = player.color;
         ctx.fillRect(player.position.x, player.position.y, 10, 10);
     }
 
