@@ -28,7 +28,8 @@ socket.on('players', data => {
 })
 
 let distance = (player1, player2) => Math.sqrt(Math.pow(player1.position.x - player2.position.x, 2) + Math.pow(player1.position.y - player2.position.y, 2))
-let playerIsClose = (player) => players.filter(other => other.id !== player.id && distance(other, player) < 50).length > 0
+let closePlayers = (player) => players.filter(other => other.id !== player.id && distance(other, player) < 50)
+let playerIsClose = (player) => closePlayers(player).length > 0
 
 let initGame = () => {
     let canvas = null
@@ -55,10 +56,10 @@ let initGame = () => {
         ctx.arc(player.position.x, player.position.y, 10, 0, 2 * Math.PI)
         ctx.fill()
 
-        if (playerIsClose(player)) {
+        if (let ) {
             console.log("in if clause")
             ctx.font = "12px sans-serif";
-            ctx.fillStyle = '#000000'
+            ctx.fillStyle = ''
             ctx.fillText(player.name, player.position.x + 15, player.position.y + 5);
         }
     }
