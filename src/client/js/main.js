@@ -56,10 +56,12 @@ let initGame = () => {
         ctx.arc(player.position.x, player.position.y, 10, 0, 2 * Math.PI)
         ctx.fill()
 
-        if (let ) {
+        let others = closePlayers(player)
+
+        if (others.length > 0) {
             console.log("in if clause")
-            ctx.font = "12px sans-serif";
-            ctx.fillStyle = ''
+            ctx.font = "12px sans-serif"
+            ctx.fillStyle = `rgba(0,0,0,${distance(others[0], player) / 50 * 255})`
             ctx.fillText(player.name, player.position.x + 15, player.position.y + 5);
         }
     }
