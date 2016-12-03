@@ -4,7 +4,9 @@
   "description": "we do things",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "cd src/server && babel-node --use_strict index.js",
+    "fe": "babel ./client/src/ -d ./client/dist/",
+    "build": "babel ./src/server/ -d ./dist/server/"
   },
   "repository": {
     "type": "git",
@@ -17,8 +19,12 @@
   },
   "homepage": "https://github.com/theRealPengBang/hackberlin#readme",
   "dependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-latest": "^6.16.0",
     "babelify": "^7.3.0",
     "browserify": "^13.1.1",
+    "express": "^4.14.0",
+    "socket.io": "^1.7.1",
     "watchify": "^3.7.0"
   }
 }
