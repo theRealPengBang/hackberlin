@@ -10,7 +10,8 @@
     "build:client": "cp -r -f src/client/templates/* dist/public/",
     "build": "run-p build:server build:client build:css build:js",
     "build:js": "browserify -i ws -e src/client/js/main.js -o dist/public/js/main.bundle.js -t [ babelify --presets [ es2015 ] ]",
-    "build:css": "node-sass src/client/css/main.scss --sourceMapEmbed | postcss -u autoprefixer -o dist/public/css/main.css"
+    "build:css": "node-sass src/client/css/main.scss --sourceMapEmbed | postcss -u autoprefixer -o dist/public/css/main.css",
+    "production": "npm run build && cp -r -f dist production"
   },
   "repository": {
     "type": "git",

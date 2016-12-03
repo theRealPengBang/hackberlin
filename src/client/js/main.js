@@ -4,7 +4,7 @@ import raf from 'raf'
 
 const tickrate = 100;
 
-let socket = io('http://localhost:1337');
+let socket = io();
 
 socket.on('message', msg => {
     console.log('hello', msg);
