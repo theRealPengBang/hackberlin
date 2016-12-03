@@ -7,6 +7,6 @@ socket.on('message', msg => {
 });
 
 setInterval(function() {
-    socket.emit('position', '10')
+    socket.emit('position', {position:'10'})
     console.log('gesendet')
 }, 1000);

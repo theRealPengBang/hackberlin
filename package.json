@@ -7,7 +7,7 @@
     "serve": "node dist/server/index.js",
     "build:server": "babel ./src/server/ -d ./dist/server/",
     "bs": "run-s build serve",
-    "build:client": "test -d dist/public || mkdir -p dist/public && cp -rf ./src/client/templates/* ./dist/public/",
+    "build:client": "test -d ./dist/public || mkdir -p ./dist/public && cp -rf ./src/client/templates/* ./dist/public/",
     "build": "run-p build:server build:client build:css build:js",
     "build:js": "test -d dist/public/js || mkdir -p dist/public/js && browserify -i ws -e src/client/js/main.js -o dist/public/js/main.bundle.js -t [ babelify --presets [ es2015 ] ]",
     "build:css": "node-sass src/client/css/main.scss --sourceMapEmbed | postcss -u autoprefixer -o dist/public/css/main.css"

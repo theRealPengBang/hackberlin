@@ -17,6 +17,7 @@ io.on('connection', function (socket) {
     socket.on('message', msg => {
         console.log('position:', msg);
     });
+    socket.on('position', pos => console.log(pos))
 });
 
 // app.get('/', function(req, res){
