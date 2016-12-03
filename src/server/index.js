@@ -10,7 +10,8 @@ let publicPath = path.join(__dirname, '../public')
 app.use(express.static(publicPath))
 
 io.on('connection', function (socket) {
-    console.log('!!!connection!!!')
+    let connectionId;
+    console.log('!!!connection!!!',socket.id)
 
     socket.emit('message', 'hallo duda');
 
@@ -18,6 +19,8 @@ io.on('connection', function (socket) {
         console.log('position:', msg);
     });
     socket.on('position', pos => console.log(pos))
+
+    socket.on('cursorPosition', pos=> console.log('cursor Position:', pos))
 });
 
 // app.get('/', function(req, res){

@@ -1,9 +1,16 @@
 import io from 'socket.io-client'
 import $ from 'jquery'
-import raf from 'raf'
 
 let socket = io('http://localhost:1337');
 
+socket.on('message', msg => {
+    console.log('hello', msg);
+});
+
+setInterval(function () {
+    socket.emit('position', {position: '10'})
+    console.log('gesendet')
+}, 1000);
 
 let players = [
     {x: 10, y: 10},
@@ -12,6 +19,16 @@ let players = [
     {x: 20, y: 40},
     {x: 10, y: 70},
 ]
+let cursorPosition  = {x : 0, y : 0}
+window.addEventListener('mousemove', e=> {
+    cursorPosition=  {x : e.clientX, y: e.clientY }
+    console.log("CP!!",cursorPosition)
+
+})
+setInterval(()=> {
+    socket.emit('cursorPosition', cursorPosition)
+},100)
+
 
 socket.on('players', data => {
     players = data.items
