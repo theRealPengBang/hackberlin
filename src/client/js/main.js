@@ -4,17 +4,13 @@ import raf from 'raf'
 
 let socket = io('http://localhost:1337');
 
-socket.on('message', msg => {
-    console.log('hello', msg);
-});
-
-setInterval(function () {
-    socket.emit('position', {position: '10'})
-    console.log('gesendet')
-}, 1000);
 
 let players = [
-    {x: 10, y: 10}
+    {x: 10, y: 10},
+    {x: 50, y: 10},
+    {x: 10, y: 50},
+    {x: 20, y: 40},
+    {x: 10, y: 70},
 ]
 
 socket.on('players', data => {
@@ -40,12 +36,21 @@ $(function () {
         ctx.canvas.height = window.innerHeight;
     }
 
+    let renderPlayer = (player) => {
+        ctx.fillStyle = "green";
+        ctx.fillRect(player.x, player.y, player.x + 10, player.y + 10);
+    }
+
+    let render = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        players.map(renderPlayer)
+    }
+
     setupCanvas()
     $window.on('resize', resizeCanvas)
 
 
-    ctx.fillStyle = "green";
-    ctx.fillRect(10, 10, 100, 100);
+    render()
 
     // raf(function tick() {
     //     console.log('tick')
