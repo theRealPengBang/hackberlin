@@ -3,6 +3,7 @@ import $ from 'jquery'
 import raf from 'raf'
 
 const tickrate = 100;
+let name = 'Anon';
 
 let socket = io();
 
@@ -26,7 +27,7 @@ socket.on('players', data => {
     players = data.items
 })
 
-$(function () {
+let initGame = () => {
     let canvas = null
     let $canvas = null
     let ctx = null
@@ -71,5 +72,21 @@ $(function () {
     setInterval(() => {
         render()
     }, 1000 / tickrate)
+}
+
+$(function () {
+    let $inputform = $('.nameinput')
+    let $submit = $('#submit')
+    let $nameinput = $('#name')
+
+    $submit.on('click', (e) => {
+        name = $nameinput.val()
+
+        $inputform.hide()
+
+        socket.emit('send playername', name)
+
+        initGame()
+    })
 })
 

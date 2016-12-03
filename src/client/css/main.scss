@@ -1,15 +1,14 @@
 * {
   box-sizing: border-box;
 }
-canvas {
-  cursor: none;
-}
 html, body {
   padding: 0;
   margin: 0;
 }
 body {
   overflow: hidden;
+  position: relative;
 }
 
 @import 'components/maincanvas';
+@import 'components/nameinput';
