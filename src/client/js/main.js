@@ -10,7 +10,6 @@ let initGame = () => {
     let ctx = null
     let $window = $(window)
     let $body = $('body')
-
     const tickrate = 100;
 
     let socket = io();
@@ -70,6 +69,20 @@ let initGame = () => {
     setupCanvas()
     $window.on('resize', resizeCanvas)
 
+    $canvas.on('click', ()=>{
+
+        let $inputform = $('.nameinput')
+        let $submit = $('#submit')
+        let $nameinput = $('#name')
+        $inputform.show()
+        $submit.on('click', (e) => {
+            name = $nameinput.val()
+
+            $inputform.hide()
+
+            initGame()
+        })
+    })
     // we should use requestanimationframe, but naaaahhhh
     setInterval(() => {
         render()
