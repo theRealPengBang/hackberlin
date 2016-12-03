@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "serve": "node dist/server/index.js",
-    "fe": "babel ./client/src/ -d ./client/dist/",
     "build": "babel ./src/server/ -d ./dist/server/",
     "bs": "npm run build && npm run serve"
   },
