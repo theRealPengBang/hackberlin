@@ -8,7 +8,7 @@ import util from './shared/util.js'
 let app = express();
 let http = HTTP.Server(app);
 let io = IO(http);
-let tickrate = 100;
+let tickrate = 60;
 let publicPath = path.join(__dirname, '../public')
 let players = []
 

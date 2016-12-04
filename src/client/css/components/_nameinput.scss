@@ -9,22 +9,30 @@
   align-items: center;
   background: rgba(0, 0, 0, .2);
   text-align: center;
+  padding: 20px;
 }
 
 .nameinput__wrapper {
   margin: auto;
-  width: 400px;
+  max-width: 400px;
+  padding: 40px;
+  background: #fff;
+  border-radius: 2px;
+
+  @include materialshadow(1);
 }
 
 .nameinput__name {
   margin: 10px 0;
   padding: 10px;
-  width: 400px;
+  width: 100%;
   background: #fff;
   border: none;
   text-align: center;
   font-size: 16px;
   border-radius: 5px;
+
+  @include materialshadow(1);
 }
 
 .nameinput__submit {
@@ -39,4 +47,6 @@
   margin: 10px 0;
   cursor: pointer;
   text-align: center;
+
+  @include materialshadow(1);
 }
