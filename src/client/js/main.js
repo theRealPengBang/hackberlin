@@ -17,7 +17,7 @@ $(function () {
 
         $inputform.hide()
 
-        instance.join('name')
+        instance.join(name)
     })
 
 })
